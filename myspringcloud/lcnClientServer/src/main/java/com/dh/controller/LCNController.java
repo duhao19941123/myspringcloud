@@ -30,7 +30,7 @@ public class LCNController {
     private TypeService typeService;
 
     @GetMapping("testLCN")
-    public void testLCN(){
+    public void testLCN() {
         typeService.getMaxFourElementTimes();
     }
 
@@ -38,8 +38,8 @@ public class LCNController {
     @LcnTransaction(propagation = DTXPropagation.SUPPORTS)
     @Transactional()
     @GetMapping("add")
-    public void add(){
-        Type type  = new Type();
+    public void add() {
+        Type type = new Type();
         String uuid = UUID.randomUUID().toString();
         uuid = uuid.replace("-", "");
         type.setId(uuid);
@@ -50,8 +50,6 @@ public class LCNController {
 
         typeService.add(type);
     }
-
-
 
 
 }

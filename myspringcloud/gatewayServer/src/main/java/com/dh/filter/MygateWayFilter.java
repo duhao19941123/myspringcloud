@@ -17,8 +17,10 @@ import reactor.core.publisher.Mono;
 public class MygateWayFilter implements GlobalFilter, Ordered {
 
     private Logger log = LoggerFactory.getLogger(MygateWayFilter.class);
+
     /**
      * 可以用于验证用户登录状态，设置某部分请求信息等。
+     *
      * @param exchange
      * @param chain
      * @return
@@ -29,15 +31,15 @@ public class MygateWayFilter implements GlobalFilter, Ordered {
         ServerHttpResponse response = exchange.getResponse();
         String uri = request.getURI().toString();
         //判断当前是什么类型请求GET请求直接放行
-        if (StringUtils.equals(request.getMethod().toString(), "GET")){
+        if (StringUtils.equals(request.getMethod().toString(), "GET")) {
             return chain.filter(exchange);
         }
         //不是GET，判断是不是登录
-        if (uri.contains("test")){
+        if (uri.contains("test")) {
             return chain.filter(exchange);
         }
         String token = request.getHeaders().getFirst("token");
-        System.out.println("token=" + token );
+        System.out.println("token=" + token);
         return response.setComplete();
     }
 
