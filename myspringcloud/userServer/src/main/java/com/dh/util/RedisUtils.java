@@ -8,10 +8,7 @@ import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 /**
- * redis操作工具类.</br>
- * (基于RedisTemplate)
- * @author xcbeyond
- * 2018年7月19日下午2:56:24
+ *  redis操作工具类
  */
 @Component
 public class RedisUtils {
