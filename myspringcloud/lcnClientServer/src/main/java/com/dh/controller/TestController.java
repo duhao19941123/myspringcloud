@@ -1,7 +1,5 @@
 package com.dh.controller;
 
-import com.dh.dto.rqs.Student;
-import com.dh.service.TypeService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -48,17 +46,4 @@ public class TestController {
         return feignClientController.testPost(string + "feignClientTestPost");
     }
 
-    @PostMapping("feignTestPostBody")
-    public String feignTestPostBody(@RequestBody Student student){
-        return feignClientController.testPostBody(student);
-    }
-
-    @Autowired
-    private TypeService typeService;
-
-
-    @GetMapping("testMysql")
-    public Object testMysql(){
-        return  typeService.getTypeByCode("signUpTimes") ;
-    }
 }

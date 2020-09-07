@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dh.lcn.dao.LcnMapper">
+  <resultMap id="BaseResultMap" type="com.dh.lcn.entity.LcnEntity">
+    <!--@mbg.generated-->
+    <!--@Table t_s_type-->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+   id ,content
+  </sql>
+
+
+  <insert id="add" parameterType="com.dh.lcn.entity.LcnEntity">
+    insert  into lcn( id, content) values (#{id}, #{content})
+  </insert>
+
+</mapper>
