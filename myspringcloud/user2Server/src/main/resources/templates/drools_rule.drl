@@ -1,0 +1,2 @@
+package com.core.drools
+import com.dh.drools.entity.EntityRule;
