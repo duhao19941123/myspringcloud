@@ -4,12 +4,11 @@ import com.codingapi.txlcn.tc.annotation.LcnTransaction;
 import com.dh.entity.LcnEntity;
 import com.dh.service.LcnService;
 import com.dh.util.RedisUtils;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 
@@ -32,6 +31,8 @@ public class TestController {
     @Autowired
     private LcnService lcnService;
 
+    @Autowired
+    private RestTemplate restTemplate;
     /**
      * redis功能测试
      */
@@ -41,6 +42,27 @@ public class TestController {
         System.out.println(redisUtils.get("name"));
     }
 
+    @PostMapping("hystrixTest")
+    public void hystrixTest(String string){
+        String url = "http://lcnClient/test/testServer?string=" + string;
+        String back = restTemplate.getForObject(url ,String.class);
+        System.out.println(back);
+//        System.out.println(feignClientController.test(string));
+    }
+
+    @GetMapping("testServer")
+    @HystrixCommand(fallbackMethod = "testErr")
+    public String testServer(@RequestParam("string") String string){
+        if(string.equals("1")){
+            int n = 1/0;
+        }
+        return "成功返回" + string;
+    }
+
+
+    public String testErr(@RequestParam("string") String string){
+        return "失败返回" + string;
+    }
 
     /**
      * lcn分布式事务测试

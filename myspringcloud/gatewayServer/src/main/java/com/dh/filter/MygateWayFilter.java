@@ -30,6 +30,7 @@ public class MygateWayFilter implements GlobalFilter, Ordered {
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpResponse response = exchange.getResponse();
         String uri = request.getURI().toString();
+        System.out.println("进入网关了=========");
         //判断当前是什么类型请求GET请求直接放行
         if (StringUtils.equals(request.getMethod().toString(), "GET")) {
             return chain.filter(exchange);

@@ -21,8 +21,9 @@ public class TestController {
 
     @GetMapping("test")
     @HystrixCommand(fallbackMethod = "fallBackTest")
-    public String test(String string){
+    public String test(@RequestParam("string")String string){
 
+        int n = 1/0;
         return "master=====" + string ;
     }
 
@@ -32,7 +33,7 @@ public class TestController {
 
     @GetMapping("ribbonTest")
     public String ribbonTest(String string){
-        String url = "http://userserver/test/test?string=" + string;
+        String url = "http://userServer/test/testServer?string=" + string;
         return restTemplate.getForObject(url ,String.class);
     }
 
@@ -46,4 +47,17 @@ public class TestController {
         return feignClientController.testPost(string + "feignClientTestPost");
     }
 
+    @GetMapping("testServer")
+    @HystrixCommand(fallbackMethod = "testErr")
+    public String testServer(@RequestParam("string") String string){
+        if(string.equals("1")){
+            int n = 1/0;
+        }
+        return "成功返回" + string;
+    }
+
+
+    public String testErr(@RequestParam("string") String string){
+        return "失败返回" + string;
+    }
 }
