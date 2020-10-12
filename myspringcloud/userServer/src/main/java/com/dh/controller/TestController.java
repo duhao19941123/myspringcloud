@@ -68,7 +68,7 @@ public class TestController {
      * lcn分布式事务测试
      * @return
      */
-    @GetMapping("test")
+    @PostMapping("test")
     @LcnTransaction
     @Transactional
     public String test(){
