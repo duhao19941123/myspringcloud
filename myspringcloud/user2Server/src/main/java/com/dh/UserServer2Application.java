@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableHystrix
 @EnableFeignClients
-@MapperScan({"com.dh.dao" , "com.dh.*.dao"})
+@MapperScan({"com.dh.dao" , "com.dh.*.dao", "com.dh.*.*.dao"})
 @EnableDistributedTransaction
 @EnableTransactionManagement
 public class UserServer2Application {
