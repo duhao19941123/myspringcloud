@@ -1,7 +1,7 @@
 package com.dh.annotation.MyAnnotation.config;
 
 
-import com.dh.annotation.MyAnnotation.dao.BookDao;
+import com.dh.annotation.MyAnnotation.service.BookService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -29,7 +29,7 @@ import java.lang.reflect.Method;
     public class LoggerAspect {
 
     @Autowired
-    private BookDao bookDao;
+    private BookService bookService;
 
     /**
      * 定义切入点：对要拦截的方法进行定义与限制，如包、类
@@ -51,7 +51,7 @@ import java.lang.reflect.Method;
         } catch (Throwable e) {
             e.printStackTrace();
         }
-        System.out.println( bookDao.getBook().toString());
+        System.out.println(bookService.getBook());
         System.out.println("4===");
     }
 
@@ -71,4 +71,6 @@ import java.lang.reflect.Method;
     public void after() {
         System.out.println("3===");
     }
+
+
 }
