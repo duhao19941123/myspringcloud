@@ -27,6 +27,7 @@ public class UserServer2Application {
 
     @Bean
     @LoadBalanced
+
     public RestTemplate template(){
         return new RestTemplate();
     }
